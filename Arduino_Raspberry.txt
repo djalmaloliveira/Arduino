@@ -1,0 +1,55 @@
+
+
+https://www.youtube.com/watch?v=1dmLpR4V35E
+
+import RPI.GPIO as gpio
+import time
+import serial
+
+arduino = serial.Serial('/dev/ttyACM0',9600)
+
+gpio.setmode(gpio.BCM)
+
+gpio.setup(20,gpio.OUT)
+
+
+for x in range(1,10):
+	gpio.output(20,gpio.HIGH)
+	arduino.write(b'0')
+	time.sleep(0.5)
+	gpio.output(20,gpio.LOW)
+	arduino.write(b'1')
+	time.sleep(0.5)
+	
+gpio.cleanup()
+	
+
+
+
+
+#define pinLED 8
+
+void setup(){
+	//put yout setup cod here, to run once:
+	
+	pinMode(pinLED, OUTPUT);
+	Serial.begin(9600);
+	
+}
+
+void loop(){
+
+	//put your main code here, to run repeatedply;
+	
+	if (Serial.available()){
+		char lido = char(Serial.read());
+		
+		if (lido == '0'){
+			digitalWrite(pindLED, LOW);			
+		}
+		
+		if (lido == '1'){
+			digitalWrite(pindLED, HIGH);			
+		}		
+	}
+}
